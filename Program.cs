@@ -8,8 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Use SQL Server for EF Core
+// Get connection string from Azure configuration or fallback to appsettings
+var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTION_STRING") 
+                      ?? builder.Configuration.GetConnectionString("DefaultConnection");
+                      
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // Add authentication services
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

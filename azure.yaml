@@ -1,0 +1,17 @@
+name: usermanagementapp
+location: eastus
+resourceGroup: rg-usermanagementapp
+
+services:
+  web:
+    project: .
+    host: appservice
+    language: dotnet
+    
+resources:
+  - name: sql-server
+    type: Microsoft.Sql/servers
+    location: eastus
+  - name: sql-database
+    type: Microsoft.Sql/servers/databases
+    location: eastus
