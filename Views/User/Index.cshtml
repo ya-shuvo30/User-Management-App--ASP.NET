@@ -1,0 +1,163 @@
+@using Microsoft.AspNetCore.WebUtilities
+@model List<UserManagementApp.Models.User>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "User Management";
+}
+
+@if (TempData["Alert"] != null)
+{
+    <div class="alert alert-@TempData["AlertType"] alert-dismissible fade show" role="alert">
+        @TempData["Alert"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<h2 class="mb-4">User Management</h2>
+
+<!-- Search and Filter Form -->
+<form method="get" class="row mb-3">
+    <div class="col-auto">
+        <input type="text" name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Search email" />
+    </div>
+    <div class="col-auto">
+        <select name="isBlocked" class="form-select">
+            <option value="">All Status</option>
+            @if (Context.Request.Query["isBlocked"] == "true")
+            {
+                <option value="true" selected>Blocked</option>
+            }
+            else
+            {
+                <option value="true">Blocked</option>
+            }
+            @if (Context.Request.Query["isBlocked"] == "false")
+            {
+                <option value="false" selected>Unblocked</option>
+            }
+            else
+            {
+                <option value="false">Unblocked</option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="isDeleted" class="form-select">
+            <option value="">All</option>
+            @if (Context.Request.Query["isDeleted"] == "true")
+            {
+                <option value="true" selected>Deleted</option>
+            }
+            else
+            {
+                <option value="true">Deleted</option>
+            }
+            @if (Context.Request.Query["isDeleted"] == "false")
+            {
+                <option value="false" selected>Active</option>
+            }
+            else
+            {
+                <option value="false">Active</option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search/Filter</button>
+    </div>
+</form>
+
+<!-- Bulk Actions Form -->
+<form method="post" asp-action="BulkAction">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <button type="submit" name="action" value="block" class="btn btn-warning" data-bs-toggle="tooltip" title="Block selected users">Block</button>
+        <button type="submit" name="action" value="unblock" class="btn btn-success" data-bs-toggle="tooltip" title="Unblock selected users">Unblock</button>
+        <button type="submit" name="action" value="delete" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete selected users">Delete</button>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th><input type="checkbox" id="select-all" /></th>
+                <th>
+                    <a href="?sortField=Email&sortOrder=@(Context.Request.Query["sortOrder"]=="asc"?"desc":"asc")&search=@Context.Request.Query["search"]&isBlocked=@Context.Request.Query["isBlocked"]&isDeleted=@Context.Request.Query["isDeleted"]">
+                        Email
+                    </a>
+                </th>
+                <th>
+                    <a href="?sortField=Registered&sortOrder=@(Context.Request.Query["sortOrder"]=="asc"?"desc":"asc")&search=@Context.Request.Query["search"]&isBlocked=@Context.Request.Query["isBlocked"]&isDeleted=@Context.Request.Query["isDeleted"]">
+                        Registered
+                    </a>
+                </th>
+                <th>
+                    <a href="?sortField=LastLogin&sortOrder=@(Context.Request.Query["sortOrder"]=="asc"?"desc":"asc")&search=@Context.Request.Query["search"]&isBlocked=@Context.Request.Query["isBlocked"]&isDeleted=@Context.Request.Query["isDeleted"]">
+                        Last Login
+                    </a>
+                </th>
+                <th>Blocked</th>
+                <th>Deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model.Count == 0)
+        {
+            <tr><td colspan="6" class="text-center">No users found.</td></tr>
+        }
+        else
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="selectedUsers" value="@user.Id" /></td>
+                    <td>@user.Email</td>
+                    <td>@user.RegisteredAt.ToString("yyyy-MM-dd")</td>
+                    <td>@user.LastLogin.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        @if (user.IsBlocked)
+                        {
+                            <span class="badge bg-warning text-dark">Blocked</span>
+                        }
+                    </td>
+                    <td>
+                        @if (user.IsDeleted)
+                        {
+                            <span class="badge bg-danger">Deleted</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</form>
+
+@section Scripts {
+    <script>
+        // Bootstrap tooltip initialization
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        document.getElementById('select-all').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[name="selectedUsers"]');
+            for (const cb of checkboxes) {
+                cb.checked = this.checked;
+            }
+        });
+
+        // Add form submission debugging
+        document.querySelector('form[method="post"]').addEventListener('submit', function(e) {
+            const selectedUsers = document.querySelectorAll('input[name="selectedUsers"]:checked');
+            console.log('Selected users:', selectedUsers.length);
+            console.log('Form data:', new FormData(this));
+            
+            if (selectedUsers.length === 0) {
+                alert('Please select at least one user before performing an action.');
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}

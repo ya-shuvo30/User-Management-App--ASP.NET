@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "User Statistics Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Management Test Page</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Database Statistics</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Total Users: <strong>@ViewBag.UserCount</strong></li>
+            <li class="list-group-item">Blocked Users: <strong>@ViewBag.BlockedCount</strong></li>
+            <li class="list-group-item">Deleted Users: <strong>@ViewBag.DeletedCount</strong></li>
+        </ul>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="/User" class="btn btn-primary">Go to User Management</a>
+</div>
+
+<div class="mt-3">
+    <h5>Test Instructions:</h5>
+    <ol>
+        <li>Go to the User Management page</li>
+        <li>Select one or more users using checkboxes</li>
+        <li>Click Block, Unblock, or Delete buttons</li>
+        <li>Check for success messages and database changes</li>
+        <li>Come back here to see updated statistics</li>
+    </ol>
+</div>
