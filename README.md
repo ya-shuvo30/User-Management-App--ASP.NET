@@ -117,7 +117,7 @@ An ASP.NET Core MVC application for managing users with registration, login, blo
 - Azure App Service
 - Azure SQL Database
 - Bicep (Infrastructure as Code)
-
+# Redeploy trigger
 ## Project Structure
 
 ```
