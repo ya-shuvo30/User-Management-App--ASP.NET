@@ -16,13 +16,13 @@ param appServicePlanName string = 'plan-${environmentName}'
 param appServiceName string = 'app-${environmentName}'
 
 @description('Name of the SQL Server')
-param sqlServerName string = 'sql-${environmentName}'
+param sqlServerName string = 'usermanagementserver1'
 
 @description('Name of the SQL Database')
-param sqlDatabaseName string = 'sqldb-${environmentName}'
+param sqlDatabaseName string = 'UserManagementDB'
 
 @description('SQL Server administrator login')
-param sqlAdminLogin string = 'sqladmin'
+param sqlAdminLogin string = 'db'
 
 @description('SQL Server administrator password')
 @secure()
@@ -47,7 +47,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 // SQL Server
 resource sqlServer 'Microsoft.Sql/servers@2022-05-01-preview' = {
-  name: '${sqlServerName}-${resourceToken}'
+  name: sqlServerName
   location: location
   tags: tags
   properties: {

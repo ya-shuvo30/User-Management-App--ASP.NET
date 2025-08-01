@@ -3,6 +3,19 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "environmentName": {
+      "value": "usermanagement"
+    },
+    "location": {
+      "value": "East US"
+    },
+    "sqlAdminPassword": {
+      "value": "@yeasin123"
+    }
+  }
+} "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
       "value": "usermanagementapp"
     },
     "location": {
