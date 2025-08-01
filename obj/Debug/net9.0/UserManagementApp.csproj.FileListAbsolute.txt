@@ -222,3 +222,8 @@ C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\obj\Debug\
 C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\obj\Debug\net9.0\UserManagementApp.pdb
 C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\obj\Debug\net9.0\UserManagementApp.genruntimeconfig.cache
 C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\obj\Debug\net9.0\ref\UserManagementApp.dll
+C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\bin\Debug\net9.0\appsettings.Production.json
+C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\bin\Debug\net9.0\infra\abbreviations.json
+C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\bin\Debug\net9.0\infra\main-simple.parameters.json
+C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\bin\Debug\net9.0\infra\main.parameters.json
+C:\App\ITransition_Project\Task-4\UserManagementApp\UserManagementApp\obj\Debug\net9.0\UserManagementApp.sourcelink.json

@@ -1,10 +1,9 @@
 name: usermanagementapp
-metadata:
-  template: dotnet-webapp@0.0.1-beta
 
 infra:
   provider: bicep
   path: infra
+  module: main-simple.bicep
 
 services:
   web:
