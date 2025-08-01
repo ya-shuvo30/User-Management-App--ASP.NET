@@ -52,6 +52,7 @@ resource allowAllIps 'Microsoft.Sql/servers/firewallRules@2022-05-01-preview' = 
   }
 }
 
-output connectionString string = 'Server=tcp:${sqlServer.properties.fullyQualifiedDomainName},1433;Initial Catalog=${databaseName};Persist Security Info=False;User ID=${sqlAdminLogin};Password=${sqlAdminPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+output connectionString string = 'Server=tcp:${sqlServer.properties.fullyQualifiedDomainName},1433;Initial Catalog=${databaseName};Persist Security Info=False;User ID=${sqlAdminLogin};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
 output serverName string = sqlServer.name
 output databaseName string = sqlDatabase.name
+output serverFqdn string = sqlServer.properties.fullyQualifiedDomainName

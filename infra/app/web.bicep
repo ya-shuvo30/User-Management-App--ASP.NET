@@ -21,12 +21,6 @@ resource web 'Microsoft.Web/sites@2022-03-01' = {
         name: key.key
         value: key.value
       }]
-      metadata: [
-        {
-          name: 'CURRENT_STACK'
-          value: 'dotnet'
-        }
-      ]
       netFrameworkVersion: 'v8.0'
       use32BitWorkerProcess: false
       ftpsState: 'FtpsOnly'

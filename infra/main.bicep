@@ -9,9 +9,6 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
-
 // Optional parameters to override the default azd resource naming conventions
 @description('Used to generate names for all resources in this file')
 param resourceGroupName string = ''

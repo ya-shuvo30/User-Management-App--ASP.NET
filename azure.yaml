@@ -1,17 +1,13 @@
 name: usermanagementapp
-location: eastus
-resourceGroup: rg-usermanagementapp
+metadata:
+  template: dotnet-webapp@0.0.1-beta
+
+infra:
+  provider: bicep
+  path: infra
 
 services:
   web:
     project: .
     host: appservice
     language: dotnet
-    
-resources:
-  - name: sql-server
-    type: Microsoft.Sql/servers
-    location: eastus
-  - name: sql-database
-    type: Microsoft.Sql/servers/databases
-    location: eastus
